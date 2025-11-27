@@ -8,10 +8,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Separar Vue em chunk próprio
-          if (id.includes('node_modules/vue')) {
-            return 'vue'
-          }
           // Separar Element Plus em chunks menores
           if (id.includes('node_modules/element-plus')) {
             // Dividir Element Plus em chunks menores por funcionalidade
@@ -30,6 +26,10 @@ export default defineConfig({
           // Separar state management
           if (id.includes('node_modules/pinia') || id.includes('node_modules/@vueuse/core')) {
             return 'state'
+          }
+          // Vue e outras dependências principais
+          if (id.includes('node_modules/vue') || id.includes('node_modules/lucide-vue-next')) {
+            return 'vue-vendor'
           }
           // Agrupar outras dependências de node_modules
           if (id.includes('node_modules')) {
