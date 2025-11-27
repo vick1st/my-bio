@@ -5,6 +5,12 @@
       class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white px-6"
     >
       <div class="w-full max-w-xs space-y-4 text-center">
+        <div class="flex justify-center mb-1">
+          <RouteIcon
+            class="w-6 h-6 text-gray-900 loading-route-icon"
+            :style="{ opacity: progress / 100 }"
+          />
+        </div>
         <div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
           <div
             class="h-full bg-gray-900 transition-all duration-100"
@@ -62,6 +68,7 @@ import { useLinksStore } from '@/stores/links'
 import EmbedCard from '@/components/embed-card.vue'
 import { storeToRefs } from 'pinia'
 import { ref, onMounted, onUnmounted } from 'vue'
+import { Route as RouteIcon } from 'lucide-vue-next'
 
 const loading = ref(true)
 const isFirstVisitLoading = ref(false)
@@ -119,5 +126,20 @@ onUnmounted(() => {
 .links-leave-to {
   opacity: 0;
   transform: translateY(6px);
+}
+
+.loading-route-icon {
+  transition: opacity 0.2s linear, transform 0.2s ease-out;
+  animation: loading-route-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes loading-route-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
 }
 </style>
