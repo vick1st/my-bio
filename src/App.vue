@@ -1,26 +1,29 @@
 <template>
   <div class="app-container">
     <div
-      v-if="isFirstVisitLoading"
+      v-if="isFirstVisitLoading || isClickLoading"
       class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white px-6"
     >
       <div class="w-full max-w-xs space-y-4 text-center">
         <div class="flex justify-center mb-1">
           <RouteIcon
-            class="w-6 h-6 text-gray-900 loading-route-icon"
-            :style="{ opacity: progress / 100 }"
+            :class="[
+              'w-6 h-6 text-gray-900 loading-route-icon',
+              { 'loading-route-icon-final': currentProgress >= 100 }
+            ]"
+            :style="{ opacity: currentProgress / 100 }"
           />
         </div>
         <div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
           <div
             class="h-full bg-gray-900 transition-all duration-100"
-            :style="{ width: `${progress}%` }"
+            :style="{ width: `${currentProgress}%` }"
           />
         </div>
         <p class="text-xs text-gray-600 tracking-wide">
-          Um momento, estamos otimizando sua experiência!
+          {{ currentLoadingMessage }}
         </p>
-        <p class="text-[11px] text-gray-400">{{ progress.toFixed(0) }}%</p>
+        <p class="text-[11px] text-gray-400">{{ currentProgress.toFixed(0) }}%</p>
       </div>
     </div>
 
@@ -41,7 +44,12 @@
         tag="div"
         class="flex flex-col gap-4 w-full items-center"
       >
-        <LinkCard v-for="l in links" :key="l.id" :link="l" />
+        <LinkCard
+          v-for="l in links"
+          :key="l.id"
+          :link="l"
+          @link-click="handleLinkClick"
+        />
       </transition-group>
 
       <div class="flex flex-col gap-4 w-full items-center">
@@ -67,16 +75,71 @@ import SocialLinks from '@/components/social-links.vue'
 import { useLinksStore } from '@/stores/links'
 import EmbedCard from '@/components/embed-card.vue'
 import { storeToRefs } from 'pinia'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Route as RouteIcon } from 'lucide-vue-next'
 
 const loading = ref(true)
 const isFirstVisitLoading = ref(false)
+const isClickLoading = ref(false)
 const progress = ref(0)
+const clickProgress = ref(0)
+const pendingUrl = ref<string | null>(null)
 let progressTimer: number | null = null
+let clickProgressTimer: number | null = null
+
+const currentProgress = computed(() =>
+  isFirstVisitLoading.value ? progress.value : clickProgress.value
+)
+
+const currentLoadingMessage = computed(() => {
+  if (isFirstVisitLoading.value) {
+    return 'Um momento, estamos otimizando sua experiência!'
+  }
+
+  if (clickProgress.value < 40) return 'Preparando seu destino, só um instante...'
+  if (clickProgress.value < 90) return 'Quase lá...'
+  return 'Pronto!'
+})
 
 const store = useLinksStore()
 const { links, profile, embeds } = storeToRefs(store)
+
+function handleLinkClick(url: string) {
+  isClickLoading.value = true
+  pendingUrl.value = url
+  clickProgress.value = 0
+
+  if (clickProgressTimer !== null) {
+    clearInterval(clickProgressTimer)
+  }
+
+  const duration = 1600 // ms totais para clique (mais lento)
+  const step = 40
+  const increment = 100 / (duration / step)
+
+  clickProgressTimer = window.setInterval(() => {
+    if (clickProgress.value >= 100) {
+      clickProgress.value = 100
+      if (clickProgressTimer !== null) {
+        clearInterval(clickProgressTimer)
+        clickProgressTimer = null
+      }
+
+      // manter 2s em 100% com pulsação antes de navegar
+      setTimeout(() => {
+        if (pendingUrl.value) {
+          const urlToGo = pendingUrl.value
+          pendingUrl.value = null
+          window.location.href = urlToGo
+        }
+        isClickLoading.value = false
+      }, 2000)
+
+      return
+    }
+    clickProgress.value = Math.min(100, clickProgress.value + increment)
+  }, step)
+}
 
 onMounted(() => {
   const hasVisited = localStorage.getItem('my-bio:visited')
@@ -114,6 +177,9 @@ onUnmounted(() => {
   if (progressTimer !== null) {
     clearInterval(progressTimer)
   }
+  if (clickProgressTimer !== null) {
+    clearInterval(clickProgressTimer)
+  }
 })
 </script>
 
@@ -131,6 +197,10 @@ onUnmounted(() => {
 .loading-route-icon {
   transition: opacity 0.2s linear, transform 0.2s ease-out;
   animation: loading-route-pulse 1.4s ease-in-out infinite;
+}
+
+.loading-route-icon-final {
+  animation-duration: 0.9s;
 }
 
 @keyframes loading-route-pulse {

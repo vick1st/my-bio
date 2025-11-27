@@ -14,12 +14,13 @@ import { useLinksStore } from '@/stores/links'
 import { trackClick } from '@/utils/analytics'
 
 const props = defineProps<{ link: Link }>()
+const emit = defineEmits<{ (e: 'link-click', url: string): void }>()
 const store = useLinksStore()
 
 function onClick() {
   if (!props.link.isActive) return
+  emit('link-click', props.link.url)
   store.incrementClick(props.link.id)
   trackClick(props.link.id)
-  window.open(props.link.url, '_blank', 'noopener')
 }
 </script>
