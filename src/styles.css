@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ring: #2b1a16;
+}
+
+.card-border {
+  @apply border border-brand-600 bg-white rounded-card shadow-card;
+}
+
+.app-container {
+  @apply min-h-screen flex flex-col items-center justify-between py-8 px-4 sm:px-0 bg-white;
+}
+
+.footer {
+  @apply text-sm text-gray-600 flex items-center gap-2;
+}
