@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="mt-auto pb-4">
+    <div class="mt-auto pb-7 sm:pb-4 pt-10 sm:pt-4">
       <SocialLinks />
     </div>
   </div>
