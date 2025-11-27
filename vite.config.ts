@@ -8,20 +8,17 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Separar Element Plus em chunks menores
+          // Manter Element Plus inteiro (não dividir para evitar dependências quebradas)
           if (id.includes('node_modules/element-plus')) {
-            // Dividir Element Plus em chunks menores por funcionalidade
-            if (id.includes('element-plus/es/components')) {
-              return 'element-plus-components'
-            }
-            return 'element-plus-core'
+            return 'element-plus'
+          }
+          // Separar ícones do Element Plus
+          if (id.includes('node_modules/@element-plus/icons-vue')) {
+            return 'element-icons'
           }
           // Separar outros UI libraries
           if (id.includes('node_modules/@headlessui/vue')) {
             return 'headlessui'
-          }
-          if (id.includes('node_modules/@element-plus/icons-vue')) {
-            return 'element-icons'
           }
           // Separar state management
           if (id.includes('node_modules/pinia') || id.includes('node_modules/@vueuse/core')) {
