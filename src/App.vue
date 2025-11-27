@@ -1,5 +1,23 @@
 <template>
   <div class="app-container">
+    <div
+      v-if="isFirstVisitLoading"
+      class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white px-6"
+    >
+      <div class="w-full max-w-xs space-y-4 text-center">
+        <div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+          <div
+            class="h-full bg-gray-900 transition-all duration-100"
+            :style="{ width: `${progress}%` }"
+          />
+        </div>
+        <p class="text-xs text-gray-600 tracking-wide">
+          Um momento, estamos otimizando sua experiência!
+        </p>
+        <p class="text-[11px] text-gray-400">{{ progress.toFixed(0) }}%</p>
+      </div>
+    </div>
+
     <div class="w-full flex flex-col items-center gap-6 mt-6">
       <ElSkeleton :loading="loading" animated :rows="0">
         <template #template>
@@ -43,14 +61,52 @@ import SocialLinks from '@/components/social-links.vue'
 import { useLinksStore } from '@/stores/links'
 import EmbedCard from '@/components/embed-card.vue'
 import { storeToRefs } from 'pinia'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const loading = ref(true)
+const isFirstVisitLoading = ref(false)
+const progress = ref(0)
+let progressTimer: number | null = null
+
 const store = useLinksStore()
 const { links, profile, embeds } = storeToRefs(store)
 
 onMounted(() => {
-  setTimeout(() => (loading.value = false), 300)
+  const hasVisited = localStorage.getItem('my-bio:visited')
+
+  // Primeira visita: mostra tela de loading com barra de progresso
+  if (!hasVisited) {
+    isFirstVisitLoading.value = true
+    progress.value = 0
+
+    const duration = 1800 // ms totais
+    const step = 40 // intervalo em ms
+    const increment = 100 / (duration / step)
+
+    progressTimer = window.setInterval(() => {
+      if (progress.value >= 100) {
+        progress.value = 100
+        isFirstVisitLoading.value = false
+        loading.value = false
+        localStorage.setItem('my-bio:visited', '1')
+        if (progressTimer !== null) {
+          clearInterval(progressTimer)
+          progressTimer = null
+        }
+        return
+      }
+      progress.value = Math.min(100, progress.value + increment)
+    }, step)
+  } else {
+    // Visitas seguintes: mantém apenas o skeleton leve
+    setTimeout(() => (loading.value = false), 300)
+  }
+})
+
+onUnmounted(() => {
+  if (progressTimer !== null) {
+    clearInterval(progressTimer)
+  }
 })
 </script>
 
