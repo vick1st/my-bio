@@ -17,7 +17,7 @@ const initialProjects: Project[] = [
   {
     id: 'duo-finance',
     title: 'Duo Finance',
-    description: 'Aplicação financeira para gerenciamento de despesas e receitas de casais. Esta em fase de desenvolvimento.',
+    description: 'Plataforma de gestão financeira para casais com foco em transparência. Beta disponível para testes. Atualizações frequentes.',
     image: '',
     url: 'https://two-finance.vercel.app',
     technologies: ['Nuxt.js', 'TypeScript', 'Tailwind CSS', 'Java', 'Vite', 'Docker'],
