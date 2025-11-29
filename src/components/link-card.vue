@@ -4,7 +4,14 @@
     :disabled="!link.isActive"
     @click="onClick"
   >
-    <span class="text-gray-900">{{ link.title }}</span>
+    <div class="flex items-center gap-2">
+      <div
+        v-if="getLinkIcon(link.id)"
+        class="w-4 h-4"
+        v-html="getLinkIcon(link.id)"
+      />
+      <span class="text-gray-900">{{ link.title }}</span>
+    </div>
   </button>
 </template>
 
@@ -12,6 +19,7 @@
 import type { Link } from '@/types'
 import { useLinksStore } from '@/stores/links'
 import { trackClick } from '@/utils/analytics'
+import { getLinkIcon } from '@/utils/link-icons'
 
 const props = defineProps<{ link: Link }>()
 const emit = defineEmits<{ (e: 'link-click', url: string): void }>()

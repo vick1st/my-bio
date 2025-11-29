@@ -45,7 +45,7 @@ const initialEmbeds: Embed[] = [
     id: 'spotify-playlist',
     src: 'https://open.spotify.com/embed/playlist/2t2ijFzSSxphZMYES6BKVB?utm_source=generator&theme=0',
     title: 'Spotify Playlist',
-    height: 352,
+    height: 152,
     isActive: true,
   },
 ]
