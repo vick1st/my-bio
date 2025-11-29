@@ -20,7 +20,7 @@ const initialProjects: Project[] = [
     description: 'Aplicação financeira para gerenciamento de despesas e receitas de casais. Esta em fase de desenvolvimento.',
     image: '',
     url: 'https://two-finance.vercel.app',
-    technologies: ['Nuxt.js', 'TypeScript', 'Tailwind CSS', 'Java', 'Vite'],
+    technologies: ['Nuxt.js', 'TypeScript', 'Tailwind CSS', 'Java', 'Vite', 'Docker'],
     githubUrl: '',
     isActive: true,
   }
