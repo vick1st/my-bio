@@ -27,3 +27,14 @@ export interface Embed {
   height?: number
   isActive: boolean
 }
+
+export interface Project {
+  id: string
+  title: string
+  description: string
+  image?: string
+  url?: string
+  technologies: string[]
+  githubUrl?: string
+  isActive: boolean
+}
