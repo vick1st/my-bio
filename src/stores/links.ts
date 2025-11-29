@@ -86,9 +86,29 @@ export const useLinksStore = defineStore('links', () => {
     profile.value.socialLinks = initialProfile.socialLinks
   }
 
+  // Sincronizar embeds do initialEmbeds com o localStorage
+  function syncEmbeds() {
+    const existingIds = new Set(embeds.value.map(e => e.id))
+
+    initialEmbeds.forEach(initialEmbed => {
+      if (!existingIds.has(initialEmbed.id)) {
+        embeds.value.push(initialEmbed)
+      } else {
+        const existingEmbed = embeds.value.find(e => e.id === initialEmbed.id)
+        if (existingEmbed) {
+          existingEmbed.src = initialEmbed.src
+          existingEmbed.title = initialEmbed.title
+          existingEmbed.height = initialEmbed.height
+          existingEmbed.isActive = initialEmbed.isActive
+        }
+      }
+    })
+  }
+
   // Executar sincronização na inicialização
   syncLinks()
   syncProfile()
+  syncEmbeds()
 
   function incrementClick(id: string) {
     const idx = links.value.findIndex((l) => l.id === id)
