@@ -6,7 +6,7 @@ const initialProjects: Project[] = [
   {
     id: 'chic-decorados',
     title: 'Chic Decorados',
-    description: 'Site institucional para empresa de decoração e design de interiores. Interface moderna e responsiva com apresentação de produtos e serviços.',
+    description: 'Landing page para Chic Decorados, empresa de decoração artesanal para eventos, casamento e festas. Foquei em um design limpo e moderno para destacar o trabalho feito por eles.',
     image: '',
     url: 'https://www.chicdecorados.com.br/',
     technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
