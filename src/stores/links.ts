@@ -12,14 +12,6 @@ const initialLinks: Link[] = [
     isActive: true,
   },
   {
-    id: 'youtube',
-    title: 'YouTube',
-    url: 'https://www.youtube.com/@vick1st',
-    icon: '',
-    clicks: 0,
-    isActive: true,
-  },
-  {
     id: 'duofinance',
     title: 'Portfólio',
     url: '/portfolio',
@@ -57,7 +49,11 @@ export const useLinksStore = defineStore('links', () => {
 
   // Sincronizar novos links do initialLinks com o localStorage
   function syncLinks() {
+    const initialIds = new Set(initialLinks.map(l => l.id))
     const existingIds = new Set(links.value.map(l => l.id))
+    
+    // Remove links que não estão mais no initialLinks
+    links.value = links.value.filter(l => initialIds.has(l.id))
     
     // Adicionar novos links que não existem no localStorage
     initialLinks.forEach(initialLink => {

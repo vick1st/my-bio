@@ -3,14 +3,13 @@ import { useLocalStorage } from '@vueuse/core'
 import type { Project } from '@/types'
 
 const initialProjects: Project[] = [
-  
   {
-    id: 'everton-motoboy',
-    title: 'Everton Motoboy - Landing Page',
-    description: 'Landing page profissional para serviços de motoboy em Curitiba. Site responsivo com formulário de contato, área de cobertura e informações de serviços.',
+    id: 'chic-decorados',
+    title: 'Chic Decorados',
+    description: 'Site institucional para empresa de decoração e design de interiores. Interface moderna e responsiva com apresentação de produtos e serviços.',
     image: '',
-    url: 'https://everton-motoboy.com.br/',
-    technologies: ['HTML', 'CSS', 'JavaScript'],
+    url: 'https://www.chicdecorados.com.br/',
+    technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
     githubUrl: '',
     isActive: true,
   },
@@ -21,6 +20,16 @@ const initialProjects: Project[] = [
     image: '',
     url: 'https://two-finance.vercel.app',
     technologies: ['Nuxt.js', 'TypeScript', 'Tailwind CSS', 'Java', 'Vite', 'Docker'],
+    githubUrl: '',
+    isActive: true,
+  },
+  {
+    id: 'everton-motoboy',
+    title: 'Everton Motoboy - Landing Page',
+    description: 'Landing page profissional para serviços de motoboy em Curitiba. Site responsivo com formulário de contato, área de cobertura e informações de serviços.',
+    image: '',
+    url: 'https://everton-motoboy.com.br/',
+    technologies: ['HTML', 'CSS', 'JavaScript'],
     githubUrl: '',
     isActive: true,
   }
