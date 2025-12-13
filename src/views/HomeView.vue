@@ -9,8 +9,18 @@
           </h1>
           
           <p class="text-lg text-gray-600 leading-relaxed max-w-md px-4">
-            Essa página ainda está em desenvolvimento, mas você pode acessar:
+            Essa página ainda está em desenvolvimento, mas você pode acessar
           </p>
+        </div>
+
+        <!-- Animação Lottie -->
+        <div class="relative my-4 flex items-center justify-center">
+          <DotLottieVue
+            style="height: 320px; width: 320px"
+            autoplay
+            loop
+            src="/Loader cat.json"
+          />
         </div>
 
         <!-- Botões de Navegação -->
@@ -61,6 +71,7 @@
 </template>
 
 <script setup lang="ts">
+import { DotLottieVue } from '@lottiefiles/dotlottie-vue'
 </script>
 
 <style scoped>
@@ -74,6 +85,7 @@
     transform: translateY(0);
   }
 }
+
 
 .animate-fade-in {
   animation: fade-in 0.6s ease-out;
