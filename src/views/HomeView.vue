@@ -5,7 +5,7 @@
       <div class="flex flex-col items-center gap-6 w-full sm:w-[460px] animate-fade-in">
         <div class="flex flex-col items-center gap-4 text-center">
           <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
-            Seja muito bem vindo ao meu site profissional!
+            Seja muito bem vindo!
           </h1>
           
           <p class="text-lg text-gray-600 leading-relaxed max-w-md px-4">
