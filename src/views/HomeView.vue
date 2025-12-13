@@ -7,10 +7,6 @@
           <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
             Seja muito bem vindo!
           </h1>
-          
-          <p class="text-lg text-gray-600 leading-relaxed max-w-md px-4">
-            Essa página ainda está em desenvolvimento, mas você pode acessar
-          </p>
         </div>
 
         <!-- Animação Lottie -->
@@ -22,6 +18,10 @@
             src="/Loader cat.json"
           />
         </div>
+
+        <p class="text-lg text-gray-600 leading-relaxed max-w-md px-4 text-center">
+          Essa página ainda está em desenvolvimento, mas você pode acessar
+        </p>
 
         <!-- Botões de Navegação -->
         <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-4">
