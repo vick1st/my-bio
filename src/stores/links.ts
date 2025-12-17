@@ -4,14 +4,6 @@ import type { Link, Profile, Embed } from '@/types'
 
 const initialLinks: Link[] = [
   {
-    id: 'github',
-    title: 'Github',
-    url: 'https://github.com/vick1st',
-    icon: '',
-    clicks: 0,
-    isActive: true,
-  },
-  {
     id: 'duofinance',
     title: 'Portfólio',
     url: '/portfolio',
@@ -20,8 +12,16 @@ const initialLinks: Link[] = [
     isActive: true,
   },
   {
+    id: 'github',
+    title: 'Github',
+    url: 'https://github.com/vick1st',
+    icon: '',
+    clicks: 0,
+    isActive: true,
+  },
+  {
     id: 'hobbies',
-    title: 'Hobbies',
+    title: 'Serviços Audiovisuais',
     url: '/hobbies',
     icon: '',
     clicks: 0,
@@ -31,7 +31,7 @@ const initialLinks: Link[] = [
 
 const initialProfile: Profile = {
   name: '@vick1st',
-  bio: 'Desenvolvedor de Sistemas • Web & Software Projetos reais, foco em solução.',
+  bio: 'Desenvolvedor de Sistemas • Web & Software\nProjetos reais, foco em solução.',
   avatar: '/perfil.jpeg',
   socialLinks: [
     { platform: 'instagram', url: 'https://instagram.com/', icon: 'instagram' },

@@ -51,6 +51,16 @@
           @link-click="handleLinkClick"
         />
       </transition-group>
+    </div>
+
+    <!-- Spotify no final da página -->
+    <div class="w-full flex flex-col items-center gap-4 mt-8 mb-6">
+      <!-- Divisor Visual antes do Spotify -->
+      <div class="w-full flex items-center gap-4 max-w-md">
+        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
+        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+      </div>
 
       <div class="flex flex-col gap-4 w-full items-center">
         <EmbedCard

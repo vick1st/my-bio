@@ -9,7 +9,7 @@
       <span>{{ profile.name }}</span>
       <BadgeCheckIcon class="w-5 h-5 text-blue-500 translate-y-[1px]" />
     </h1>
-    <p class="max-w-md text-gray-700 text-sm font-bio tracking-wide">
+    <p class="max-w-md text-gray-700 text-sm font-bio tracking-wide whitespace-pre-line">
       {{ profile.bio }}
     </p>
   </header>
