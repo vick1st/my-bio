@@ -13,7 +13,7 @@
       </div>
 
       <!-- Header Minimalista -->
-      <div class="flex flex-col items-center gap-4 lg:gap-6 w-full">
+      <div class="flex flex-col items-center gap-4 lg:gap-6 w-full animate-fade-in">
         <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 tracking-tight">
           Victor Hugo
         </h1>
@@ -30,7 +30,7 @@
       </div>
 
       <!-- Seção Stack Principal -->
-      <div class="w-full">
+      <div class="w-full animate-slide-up" style="animation-delay: 100ms">
         <TechStack :technologies="mainTechnologies" />
       </div>
 
@@ -40,9 +40,11 @@
         
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-5 lg:gap-6 w-full">
           <ProjectCard
-            v-for="project in activeProjects"
+            v-for="(project, index) in activeProjects"
             :key="project.id"
             :project="project"
+            :style="{ animationDelay: `${(index + 2) * 100}ms` }"
+            class="animate-slide-up"
           />
         </div>
       </div>
@@ -90,5 +92,34 @@ const mainTechnologies = [
 </script>
 
 <style scoped>
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out both;
+}
 </style>
 
