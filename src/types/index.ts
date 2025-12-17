@@ -37,4 +37,8 @@ export interface Project {
   technologies: string[]
   githubUrl?: string
   isActive: boolean
+  status?: 'Em produção' | 'Beta' | 'Desenvolvimento' | 'Concluído'
+  scope?: string
+  responsibility?: string[]
+  result?: string
 }

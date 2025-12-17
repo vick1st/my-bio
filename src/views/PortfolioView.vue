@@ -1,88 +1,65 @@
 <template>
   <div class="app-container">
-    <div class="w-full flex flex-col items-center gap-8 mt-8">
-      <!-- Header Profissional -->
-      <div class="flex flex-col items-center gap-5 w-full sm:w-[460px] animate-fade-in">
-        <div class="flex flex-col items-center gap-4">
-          <div class="relative">
-            <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
-              Victor Hugo
-            </h1>
-            <div class="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 opacity-20 rounded-full"></div>
-          </div>
-          
-          <div class="flex flex-col items-center gap-1">
-            <p class="text-xl font-semibold text-gray-800 tracking-wide">
-              Web Developer
-            </p>
-          </div>
-        </div>
-        
-        <p class="text-sm text-gray-600 text-center max-w-md leading-relaxed px-4">
-          Desenvolvedor FullStack | Web Development • DevOps • AWS
+    <div class="w-full max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto flex flex-col gap-8 lg:gap-16 mt-6 lg:mt-12 pb-12 px-4 lg:px-8">
+      <!-- Botão Voltar -->
+      <div class="w-full flex justify-start">
+        <router-link
+          to="/bio"
+          class="inline-flex items-center gap-2 px-3 py-2 text-sm lg:text-base text-gray-500 hover:text-gray-700 transition-colors group"
+        >
+          <ArrowLeftIcon class="w-4 h-4 lg:w-5 lg:h-5 transition-transform group-hover:-translate-x-1" />
+          <span>Voltar</span>
+        </router-link>
+      </div>
+
+      <!-- Header Minimalista -->
+      <div class="flex flex-col items-center gap-4 lg:gap-6 w-full animate-fade-in">
+        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 tracking-tight">
+          Victor Hugo
+        </h1>
+        <p class="text-xl lg:text-2xl xl:text-3xl font-semibold text-gray-800 tracking-wide">
+          Desenvolvedor FullStack
         </p>
       </div>
 
       <!-- Divisor Visual -->
-      <div class="w-full sm:w-[460px] flex items-center gap-4 my-2">
+      <div class="w-full flex items-center gap-4">
         <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        <div class="w-2 h-2 rounded-full bg-brand-600"></div>
+        <div class="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
         <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
       </div>
 
-      <!-- Título da Seção -->
-      <div class="flex flex-col items-center gap-2 w-full sm:w-[460px]">
-        <h2 class="text-2xl font-bold text-gray-900">Projetos</h2>
-        <p class="text-sm text-gray-500 text-center">
-          Alguns dos projetos que desenvolvi
-        </p>
+      <!-- Seção Stack Principal -->
+      <div class="w-full animate-slide-up" style="animation-delay: 100ms">
+        <TechStack :technologies="mainTechnologies" />
       </div>
 
-      <!-- Lista de Projetos -->
-      <div class="flex flex-col gap-5 w-full items-center">
-        <ProjectCard
-          v-for="(project, index) in activeProjects"
-          :key="project.id"
-          :project="project"
-          :style="{ animationDelay: `${index * 100}ms` }"
-          class="animate-slide-up"
-        />
+      <!-- Seção Projetos -->
+      <div class="w-full flex flex-col gap-6 lg:gap-8">
+        <h2 class="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 text-center">Projetos</h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-5 lg:gap-6 w-full">
+          <ProjectCard
+            v-for="(project, index) in activeProjects"
+            :key="project.id"
+            :project="project"
+            :style="{ animationDelay: `${(index + 2) * 100}ms` }"
+            class="animate-slide-up"
+          />
+        </div>
       </div>
 
       <!-- CTA Contato -->
-      <div class="mt-4">
+      <div class="flex justify-center gap-4">
         <a
           href="https://wa.me/5541988232894"
           target="_blank"
           rel="noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-600 text-sm text-gray-900 hover:bg-brand-600 hover:text-white transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 lg:px-6 lg:py-3 rounded-full border border-gray-300 text-sm lg:text-base text-gray-700 hover:bg-gray-50 transition-colors"
         >
-          <MessageCircleIcon class="w-4 h-4" />
-          <span>Entrar em contato</span>
+          <MessageCircleIcon class="w-4 h-4 lg:w-5 lg:h-5" />
+          <span>Contato</span>
         </a>
-      </div>
-
-      <!-- Link de Volta -->
-      <div class="mt-8 pb-7 sm:pb-4">
-        <router-link
-          to="/bio"
-          class="group inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-all duration-200"
-        >
-          <svg
-            class="w-4 h-4 transition-transform group-hover:-translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          <span>Voltar para Bio</span>
-        </router-link>
       </div>
     </div>
   </div>
@@ -93,7 +70,8 @@ import { computed } from 'vue'
 import { useProjectsStore } from '@/stores/projects'
 import { storeToRefs } from 'pinia'
 import ProjectCard from '@/components/project-card.vue'
-import { MessageCircle as MessageCircleIcon } from 'lucide-vue-next'
+import TechStack from '@/components/tech-stack.vue'
+import { MessageCircle as MessageCircleIcon, ArrowLeft as ArrowLeftIcon } from 'lucide-vue-next'
 
 const store = useProjectsStore()
 const { projects } = storeToRefs(store)
@@ -101,6 +79,16 @@ const { projects } = storeToRefs(store)
 const activeProjects = computed(() =>
   projects.value.filter(p => p.isActive)
 )
+
+const mainTechnologies = [
+  'Vue.js',
+  'Vite',
+  'GitHub',
+  'Docker',
+  'JavaScript',
+  'Java',
+  'AWS'
+]
 </script>
 
 <style scoped>

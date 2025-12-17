@@ -6,32 +6,44 @@ const initialProjects: Project[] = [
   {
     id: 'chic-decorados',
     title: 'Chic Decorados',
-    description: 'Landing page para Chic Decorados, empresa de decoração artesanal para eventos, casamento e festas. Foquei em um design limpo e moderno para destacar o trabalho feito por eles.',
+    description: '',
     image: '',
     url: 'https://www.chicdecorados.com.br/',
     technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
     githubUrl: '',
     isActive: true,
+    status: 'Em produção',
+    scope: 'Frontend',
+    responsibility: ['Desenvolvimento', 'Design', 'Deploy'],
+    result: 'Landing page em produção | 3+ meses no ar',
   },
   {
     id: 'duo-finance',
     title: 'Duo Finance',
-    description: 'Plataforma de gestão financeira para casais com foco em transparência. Beta disponível para testes. Atualizações frequentes.',
+    description: '',
     image: '',
     url: 'https://two-finance.vercel.app',
     technologies: ['Nuxt.js', 'TypeScript', 'Tailwind CSS', 'Java', 'Vite', 'Docker'],
     githubUrl: '',
     isActive: true,
+    status: 'Beta',
+    scope: 'Fullstack',
+    responsibility: ['Arquitetura', 'Frontend', 'Backend', 'Deploy'],
+    result: 'Sistema escalável com arquitetura preparada para múltiplos usuários simultâneos',
   },
   {
     id: 'everton-motoboy',
     title: 'Everton Motoboy - Landing Page',
-    description: 'Landing page profissional para serviços de motoboy em Curitiba. Site responsivo com formulário de contato, área de cobertura e informações de serviços.',
+    description: '',
     image: '',
     url: 'https://everton-motoboy.com.br/',
     technologies: ['HTML', 'CSS', 'JavaScript'],
     githubUrl: '',
     isActive: true,
+    status: 'Em produção',
+    scope: 'Frontend',
+    responsibility: ['Desenvolvimento', 'Design', 'Deploy'],
+    result: 'Site responsivo em produção | Formulário de contato funcional',
   }
 ]
 
@@ -61,6 +73,10 @@ export const useProjectsStore = defineStore('projects', () => {
           existingProject.technologies = initialProject.technologies
           existingProject.githubUrl = initialProject.githubUrl
           existingProject.isActive = initialProject.isActive
+          existingProject.status = initialProject.status
+          existingProject.scope = initialProject.scope
+          existingProject.responsibility = initialProject.responsibility
+          existingProject.result = initialProject.result
         }
       }
     })
