@@ -77,6 +77,7 @@ import EmbedCard from '@/components/embed-card.vue'
 import { storeToRefs } from 'pinia'
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Route as RouteIcon } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
 
 const loading = ref(true)
 const isFirstVisitLoading = ref(false)
@@ -103,8 +104,16 @@ const currentLoadingMessage = computed(() => {
 
 const store = useLinksStore()
 const { links, profile, embeds } = storeToRefs(store)
+const router = useRouter()
 
 function handleLinkClick(url: string) {
+  // Se for uma rota interna (começa com /), navega diretamente sem loading
+  if (url.startsWith('/')) {
+    router.push(url)
+    return
+  }
+
+  // Para links externos, mantém o loading state
   isClickLoading.value = true
   pendingUrl.value = url
   clickProgress.value = 0
