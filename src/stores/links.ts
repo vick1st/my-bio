@@ -18,12 +18,20 @@ const initialLinks: Link[] = [
     icon: '',
     clicks: 0,
     isActive: true,
+  },
+  {
+    id: 'hobbies',
+    title: 'Hobbies',
+    url: '/hobbies',
+    icon: '',
+    clicks: 0,
+    isActive: true,
   }
 ]
 
 const initialProfile: Profile = {
   name: '@vick1st',
-  bio: 'Se chegou até aqui, já é curioso - então complete a missão e confira meus links.',
+  bio: 'Desenvolvedor de Sistemas • Web & Software Projetos reais, foco em solução.',
   avatar: '/perfil.jpeg',
   socialLinks: [
     { platform: 'instagram', url: 'https://instagram.com/', icon: 'instagram' },
