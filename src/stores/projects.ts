@@ -51,37 +51,41 @@ export const useProjectsStore = defineStore('projects', () => {
   const projects = useLocalStorage<Project[]>('projects', initialProjects)
 
   function syncProjects() {
-    const initialIds = new Set(initialProjects.map(p => p.id))
-    const existingIds = new Set(projects.value.map(p => p.id))
+    // Se não houver projetos ou estiver vazio, inicializa com os projetos iniciais
+    if (!projects.value || projects.value.length === 0) {
+      projects.value = [...initialProjects]
+      return
+    }
 
-    // Remove projetos que não estão mais no initialProjects ou estão vazios
-    projects.value = projects.value.filter(p => {
-      return initialIds.has(p.id) && p.title && p.description
-    })
+    const initialIds = new Set(initialProjects.map(p => p.id))
+    
+    // Remove projetos que não estão mais no initialProjects
+    projects.value = projects.value.filter(p => initialIds.has(p.id))
 
     // Adiciona ou atualiza projetos do initialProjects
     initialProjects.forEach(initialProject => {
-      if (!existingIds.has(initialProject.id)) {
+      const existingProject = projects.value.find(p => p.id === initialProject.id)
+      if (!existingProject) {
+        // Adiciona novo projeto
         projects.value.push(initialProject)
       } else {
-        const existingProject = projects.value.find(p => p.id === initialProject.id)
-        if (existingProject) {
-          existingProject.title = initialProject.title
-          existingProject.description = initialProject.description
-          existingProject.image = initialProject.image
-          existingProject.url = initialProject.url
-          existingProject.technologies = initialProject.technologies
-          existingProject.githubUrl = initialProject.githubUrl
-          existingProject.isActive = initialProject.isActive
-          existingProject.status = initialProject.status
-          existingProject.scope = initialProject.scope
-          existingProject.responsibility = initialProject.responsibility
-          existingProject.result = initialProject.result
-        }
+        // Atualiza projeto existente mantendo dados do localStorage se necessário
+        existingProject.title = initialProject.title
+        existingProject.description = initialProject.description
+        existingProject.image = initialProject.image
+        existingProject.url = initialProject.url
+        existingProject.technologies = initialProject.technologies
+        existingProject.githubUrl = initialProject.githubUrl
+        existingProject.isActive = initialProject.isActive
+        existingProject.status = initialProject.status
+        existingProject.scope = initialProject.scope
+        existingProject.responsibility = initialProject.responsibility
+        existingProject.result = initialProject.result
       }
     })
   }
 
+  // Garantir que a sincronização aconteça após o store ser inicializado
   syncProjects()
 
   function setProjects(newProjects: Project[]) {
