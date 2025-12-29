@@ -8,6 +8,16 @@ const initialLinks: Link[] = [
     title: 'Portfólio Dev',
     url: '/portfolio',
     icon: '',
+    lucideIcon: 'code-xml',
+    clicks: 0,
+    isActive: true,
+  },
+  {
+    id: 'maker-aesthetic',
+    title: 'Maker Aesthetic',
+    url: 'https://www.makeraesthetic.com/',
+    icon: '',
+    lucideIcon: 'clapperboard',
     clicks: 0,
     isActive: true,
   },
@@ -51,6 +61,7 @@ export const useLinksStore = defineStore('links', () => {
           existingLink.title = initialLink.title
           existingLink.url = initialLink.url
           existingLink.icon = initialLink.icon
+          existingLink.lucideIcon = initialLink.lucideIcon
           existingLink.isActive = initialLink.isActive
         }
       }

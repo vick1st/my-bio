@@ -3,6 +3,7 @@ export interface Link {
   title: string
   url: string
   icon?: string
+  lucideIcon?: string
   clicks: number
   isActive: boolean
 }
