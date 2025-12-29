@@ -4,8 +4,8 @@ import type { Link, Profile, Embed } from '@/types'
 
 const initialLinks: Link[] = [
   {
-    id: 'duofinance',
-    title: 'Portfólio',
+    id: 'portfolio',
+    title: 'Portfólio Dev',
     url: '/portfolio',
     icon: '',
     clicks: 0,
@@ -14,8 +14,8 @@ const initialLinks: Link[] = [
 
   {
     id: 'hobbies',
-    title: 'Hobbies',
-    url: '/hobbies',
+    title: 'Hobbies Audiovisual',
+    url: '/hobbies/audiovisual',
     icon: '',
     clicks: 0,
     isActive: true,
