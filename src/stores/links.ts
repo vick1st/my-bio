@@ -11,15 +11,6 @@ const initialLinks: Link[] = [
     clicks: 0,
     isActive: true,
   },
-
-  {
-    id: 'hobbies',
-    title: 'Hobbies Audiovisual',
-    url: '/hobbies/audiovisual',
-    icon: '',
-    clicks: 0,
-    isActive: true,
-  }
 ]
 
 const initialProfile: Profile = {

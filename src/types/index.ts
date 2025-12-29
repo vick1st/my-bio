@@ -43,20 +43,3 @@ export interface Project {
   result?: string
 }
 
-export interface Hobby {
-  id: string
-  title: string
-  description?: string
-  type: 'video' | 'edição' | 'drone' | 'freela' | 'imagem' | 'outro'
-  thumbnail?: string
-  videoUrl?: string
-  embedUrl?: string
-  imageUrl?: string
-  externalUrl?: string
-  tags?: string[]
-  date?: string
-  client?: string
-  isActive: boolean
-  order?: number
-  duration?: string
-}
