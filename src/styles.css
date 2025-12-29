@@ -6,14 +6,38 @@
   --ring: #2b1a16;
 }
 
+body {
+    background-color: #000;
+    color: #e4e4e7; /* zinc-200 */
+}
+
 .card-border {
-  @apply border border-brand-600 bg-white rounded-card shadow-card;
+  @apply border border-zinc-800 bg-zinc-900/50 backdrop-blur-md rounded-xl transition-all duration-300;
+}
+
+.card-border:hover {
+    @apply border-zinc-600 bg-zinc-900/80;
 }
 
 .app-container {
-  @apply min-h-screen flex flex-col items-center justify-between py-8 px-4 sm:px-0 bg-white;
+  @apply min-h-screen flex flex-col items-center justify-between py-8 px-4 sm:px-0 bg-black text-white selection:bg-zinc-700 selection:text-white;
 }
 
 .footer {
-  @apply text-sm text-gray-600 flex items-center gap-2;
+  @apply text-sm text-zinc-500 flex items-center gap-2;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f0f0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
