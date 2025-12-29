@@ -58,4 +58,5 @@ export interface Hobby {
   client?: string
   isActive: boolean
   order?: number
+  duration?: string
 }

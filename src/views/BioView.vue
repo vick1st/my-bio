@@ -1,39 +1,46 @@
 <template>
-  <div class="app-container">
+  <div class="bio-view bg-black min-h-screen text-white overflow-x-hidden relative">
+      <!-- Background Effects (Granulated Gradient) -->
+      <div class="fixed inset-0 z-0 bg-zinc-900 pointer-events-none">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800 via-zinc-900 to-black opacity-80"></div>
+          <div class="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+      </div>
+
     <div
       v-if="isFirstVisitLoading || isClickLoading"
-      class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white px-6"
+      class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md px-6 transition-all duration-500"
     >
       <div class="w-full max-w-xs space-y-4 text-center">
         <div class="flex justify-center mb-1">
           <RouteIcon
             :class="[
-              'w-6 h-6 text-gray-900 loading-route-icon',
+              'w-6 h-6 text-white loading-route-icon',
               { 'loading-route-icon-final': currentProgress >= 100 }
             ]"
             :style="{ opacity: currentProgress / 100 }"
           />
         </div>
-        <div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+        <div class="h-1.5 w-full bg-zinc-800/50 rounded-full overflow-hidden border border-zinc-700/50">
           <div
-            class="h-full bg-gray-900 transition-all duration-100"
+            class="h-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)] transition-all duration-100"
             :style="{ width: `${currentProgress}%` }"
           />
         </div>
-        <p class="text-xs text-gray-600 tracking-wide">
+        <p class="text-xs text-zinc-400 tracking-wide font-medium">
           {{ currentLoadingMessage }}
         </p>
-        <p class="text-[11px] text-gray-400">{{ currentProgress.toFixed(0) }}%</p>
+        <p class="text-[11px] text-zinc-500 font-mono">{{ currentProgress.toFixed(0) }}%</p>
       </div>
     </div>
 
-    <div class="w-full flex flex-col items-center gap-6 mt-6">
-      <ElSkeleton :loading="loading" animated :rows="0">
+    <!-- Main Content -->
+    <div class="relative z-10 w-full flex flex-col items-center gap-6 mt-12 px-4 max-w-md mx-auto">
+      <ElSkeleton :loading="loading" animated :rows="0" class="w-full flex flex-col items-center">
         <template #template>
-          <div class="flex flex-col items-center gap-3 w-full sm:w-[460px]">
-            <div class="h-20 w-20 rounded-full bg-gray-200" />
-            <div class="h-5 w-24 rounded bg-gray-200" />
-            <div class="h-4 w-64 rounded bg-gray-200" />
+          <div class="flex flex-col items-center gap-4 w-full">
+            <div class="h-24 w-24 rounded-full bg-zinc-800 animate-pulse" />
+            <div class="h-6 w-32 rounded bg-zinc-800 animate-pulse" />
+            <div class="h-4 w-48 rounded bg-zinc-800 animate-pulse" />
           </div>
         </template>
         <ProfileHeader :profile="profile" />
@@ -53,26 +60,7 @@
       </transition-group>
     </div>
 
-    <!-- Spotify no final da página -->
-    <div class="w-full flex flex-col items-center gap-4 mt-8 mb-6">
-      <!-- Divisor Visual antes do Spotify -->
-      <div class="w-full flex items-center gap-4 max-w-md">
-        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-        <div class="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
-        <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-      </div>
-
-      <div class="flex flex-col gap-4 w-full items-center">
-        <EmbedCard
-          v-for="e in embeds"
-          :key="e.id"
-          :src="e.src"
-          :height="e.height ?? 352"
-        />
-      </div>
-    </div>
-
-    <div class="mt-auto pb-7 sm:pb-4 pt-10 sm:pt-4">
+    <div class="relative z-10 mt-auto pb-8 pt-12">
       <SocialLinks />
     </div>
   </div>

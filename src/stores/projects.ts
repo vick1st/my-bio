@@ -53,12 +53,12 @@ export const useProjectsStore = defineStore('projects', () => {
   function syncProjects() {
     const initialIds = new Set(initialProjects.map(p => p.id))
     const existingIds = new Set(projects.value.map(p => p.id))
-    
+
     // Remove projetos que não estão mais no initialProjects ou estão vazios
     projects.value = projects.value.filter(p => {
       return initialIds.has(p.id) && p.title && p.description
     })
-    
+
     // Adiciona ou atualiza projetos do initialProjects
     initialProjects.forEach(initialProject => {
       if (!existingIds.has(initialProject.id)) {

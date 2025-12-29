@@ -11,17 +11,10 @@ const initialLinks: Link[] = [
     clicks: 0,
     isActive: true,
   },
-  {
-    id: 'github',
-    title: 'Github',
-    url: 'https://github.com/vick1st',
-    icon: '',
-    clicks: 0,
-    isActive: true,
-  },
+
   {
     id: 'hobbies',
-    title: 'Serviços Audiovisuais',
+    title: 'Hobbies',
     url: '/hobbies',
     icon: '',
     clicks: 0,
@@ -31,7 +24,7 @@ const initialLinks: Link[] = [
 
 const initialProfile: Profile = {
   name: '@vick1st',
-  bio: 'Desenvolvedor de Sistemas • Web & Software\nProjetos reais, foco em solução.',
+  bio: 'Desenvolvedor de Sistemas e Entusiasta de Audiovisual • Web & Software, foco em solução.',
   avatar: '/perfil.jpeg',
   socialLinks: [
     { platform: 'instagram', url: 'https://instagram.com/', icon: 'instagram' },
@@ -40,15 +33,7 @@ const initialProfile: Profile = {
   ],
 }
 
-const initialEmbeds: Embed[] = [
-  {
-    id: 'spotify-playlist',
-    src: 'https://open.spotify.com/embed/playlist/2t2ijFzSSxphZMYES6BKVB?utm_source=generator&theme=0',
-    title: 'Spotify Playlist',
-    height: 152,
-    isActive: true,
-  },
-]
+const initialEmbeds: Embed[] = []
 
 export const useLinksStore = defineStore('links', () => {
   const links = useLocalStorage<Link[]>('links', initialLinks)
@@ -59,10 +44,10 @@ export const useLinksStore = defineStore('links', () => {
   function syncLinks() {
     const initialIds = new Set(initialLinks.map(l => l.id))
     const existingIds = new Set(links.value.map(l => l.id))
-    
+
     // Remove links que não estão mais no initialLinks
     links.value = links.value.filter(l => initialIds.has(l.id))
-    
+
     // Adicionar novos links que não existem no localStorage
     initialLinks.forEach(initialLink => {
       if (!existingIds.has(initialLink.id)) {

@@ -13,7 +13,7 @@
       />
       <span
         v-else
-        class="text-sm text-gray-600 font-medium"
+        class="text-sm text-zinc-500 font-medium"
       >
         {{ tech }}
       </span>

@@ -23,8 +23,8 @@ const router = createRouter({
       component: PortfolioView,
     },
     {
-      path: '/hobbies',
-      name: 'hobbies',
+      path: '/hobbies/audiovisual',
+      name: 'hobbiesAudiovisual',
       component: HobbiesView,
     },
   ],

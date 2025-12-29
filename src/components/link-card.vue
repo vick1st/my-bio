@@ -10,7 +10,7 @@
         class="w-4 h-4"
         v-html="getLinkIcon(link.id)"
       />
-      <span class="text-gray-900">{{ link.title }}</span>
+      <span class="text-zinc-100 font-medium tracking-wide">{{ link.title }}</span>
     </div>
   </button>
 </template>

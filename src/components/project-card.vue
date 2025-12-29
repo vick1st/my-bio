@@ -1,17 +1,17 @@
 <template>
   <div
-    class="card-border w-full sm:w-full lg:w-full p-6 lg:p-8 flex flex-col gap-4 lg:gap-5 transition-transform hover:scale-[1.02]"
+    class="card-border w-full sm:w-full lg:w-full p-6 lg:p-8 flex flex-col gap-4 lg:gap-5 transition-all duration-300 hover:scale-[1.01] bg-zinc-900/50 border-zinc-800 hover:border-zinc-600"
   >
     <!-- Header: Título + Links -->
     <div class="flex items-start justify-between gap-4">
-      <h3 class="text-lg lg:text-xl xl:text-2xl font-semibold text-gray-900">{{ project.title }}</h3>
+      <h3 class="text-lg lg:text-xl xl:text-2xl font-bold text-white tracking-tight">{{ project.title }}</h3>
       <div class="flex gap-2 flex-shrink-0">
         <a
           v-if="project.githubUrl"
           :href="project.githubUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-gray-500 hover:text-gray-900 transition-colors"
+          class="text-zinc-500 hover:text-white transition-colors"
           title="Ver no GitHub"
         >
           <svg
@@ -29,7 +29,7 @@
           :href="project.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-gray-500 hover:text-gray-900 transition-colors"
+          class="text-zinc-500 hover:text-white transition-colors"
           title="Ver projeto"
         >
           <svg
@@ -52,7 +52,7 @@
     <!-- Badge de Status -->
     <div v-if="project.status" class="flex items-center gap-2">
       <span
-        class="inline-flex items-center px-2.5 py-0.5 lg:px-3 lg:py-1 rounded-full text-xs lg:text-sm font-medium"
+        class="inline-flex items-center px-2.5 py-0.5 lg:px-3 lg:py-1 rounded-full text-xs lg:text-sm font-medium border border-opacity-20"
         :class="getStatusClass(project.status)"
       >
         {{ project.status }}
@@ -69,12 +69,12 @@
       >
         <div
           v-if="getTechIcon(tech)"
-          class="w-6 h-6 lg:w-7 lg:h-7 transition-transform hover:scale-110"
+          class="w-6 h-6 lg:w-7 lg:h-7 transition-transform hover:scale-110 grayscale hover:grayscale-0 opacity-70 hover:opacity-100"
           v-html="getTechIcon(tech)"
         />
         <span
           v-else
-          class="text-xs text-gray-500"
+          class="text-xs text-zinc-500"
         >
           {{ tech }}
         </span>
@@ -83,24 +83,24 @@
 
     <!-- Escopo -->
     <div v-if="project.scope" class="flex items-center gap-2 lg:gap-3">
-      <span class="text-sm lg:text-base text-gray-600 font-medium">Escopo:</span>
-      <span class="inline-flex items-center px-2.5 py-0.5 lg:px-3 lg:py-1 rounded-full text-xs lg:text-sm font-medium bg-gray-100 text-gray-800">
+      <span class="text-sm lg:text-base text-zinc-400 font-medium">Escopo:</span>
+      <span class="inline-flex items-center px-2.5 py-0.5 lg:px-3 lg:py-1 rounded-full text-xs lg:text-sm font-medium bg-zinc-800 text-zinc-300 border border-zinc-700">
         {{ project.scope }}
       </span>
     </div>
 
     <!-- Responsabilidades -->
     <div v-if="project.responsibility && project.responsibility.length > 0" class="flex items-start gap-2 lg:gap-3">
-      <span class="text-sm lg:text-base text-gray-600 font-medium flex-shrink-0">Responsabilidades:</span>
-      <span class="text-sm lg:text-base text-gray-700">
+      <span class="text-sm lg:text-base text-zinc-400 font-medium flex-shrink-0">Responsabilidades:</span>
+      <span class="text-sm lg:text-base text-zinc-300">
         {{ project.responsibility.join(' • ') }}
       </span>
     </div>
 
     <!-- Resultado -->
-    <div v-if="project.result" class="pt-2 lg:pt-3 border-t border-gray-200">
-      <p class="text-sm lg:text-base font-medium text-gray-900 mb-1 lg:mb-2">Resultado:</p>
-      <p class="text-sm lg:text-base text-gray-700 leading-relaxed">{{ project.result }}</p>
+    <div v-if="project.result" class="pt-2 lg:pt-3 border-t border-zinc-800">
+      <p class="text-sm lg:text-base font-medium text-white mb-1 lg:mb-2">Resultado:</p>
+      <p class="text-sm lg:text-base text-zinc-400 leading-relaxed">{{ project.result }}</p>
     </div>
   </div>
 </template>
@@ -115,12 +115,12 @@ defineProps<{
 
 function getStatusClass(status: string) {
   const statusClasses: Record<string, string> = {
-    'Em produção': 'bg-green-100 text-green-800',
-    'Beta': 'bg-blue-100 text-blue-800',
-    'Desenvolvimento': 'bg-yellow-100 text-yellow-800',
-    'Concluído': 'bg-gray-100 text-gray-800',
+    'Em produção': 'bg-green-900/30 text-green-300 border-green-500',
+    'Beta': 'bg-blue-900/30 text-blue-300 border-blue-500',
+    'Desenvolvimento': 'bg-yellow-900/30 text-yellow-300 border-yellow-500',
+    'Concluído': 'bg-zinc-800 text-zinc-300 border-zinc-600',
   }
-  return statusClasses[status] || 'bg-gray-100 text-gray-800'
+  return statusClasses[status] || 'bg-zinc-800 text-zinc-300 border-zinc-600'
 }
 </script>
 
