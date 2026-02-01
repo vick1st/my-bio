@@ -12,15 +12,6 @@ const initialLinks: Link[] = [
     clicks: 0,
     isActive: true,
   },
-  {
-    id: 'maker-aesthetic',
-    title: 'Maker Aesthetic',
-    url: 'https://www.makeraesthetic.com/',
-    icon: '',
-    lucideIcon: 'clapperboard',
-    clicks: 0,
-    isActive: true,
-  },
 ]
 
 const initialProfile: Profile = {
