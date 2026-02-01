@@ -13,6 +13,7 @@
           rel="noopener noreferrer"
           class="text-zinc-500 hover:text-white transition-colors"
           title="Ver no GitHub"
+          @click.stop
         >
           <svg
             class="w-5 h-5"
@@ -24,13 +25,13 @@
             />
           </svg>
         </a>
-        <a
+        <button
           v-if="project.url"
-          :href="project.url"
-          target="_blank"
-          rel="noopener noreferrer"
+          type="button"
           class="text-zinc-500 hover:text-white transition-colors"
-          title="Ver projeto"
+          title="Prévia do projeto"
+          aria-label="Abrir prévia do projeto"
+          @click.stop="emitPreview"
         >
           <svg
             class="w-5 h-5"
@@ -45,7 +46,7 @@
               d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
             />
           </svg>
-        </a>
+        </button>
       </div>
     </div>
 
@@ -109,9 +110,18 @@
 import type { Project } from '@/types'
 import { getTechIcon } from '@/utils/tech-icons'
 
-defineProps<{
+const props = defineProps<{
   project: Project
 }>()
+
+const emit = defineEmits<{
+  (e: 'preview', payload: { url: string; thumbnail?: string }): void
+}>()
+
+function emitPreview() {
+  if (!props.project.url) return
+  emit('preview', { url: props.project.url, thumbnail: props.project.image })
+}
 
 function getStatusClass(status: string) {
   const statusClasses: Record<string, string> = {
